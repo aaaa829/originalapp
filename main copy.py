@@ -29,9 +29,31 @@ def drag(event):
     before_x = x
     before_y = y
 
+    # 座標の中心 canvas1.coords(figure)
+    # 座標の左上隅、右下隅　canvas1.bbox(figure)
+    # canvas1.coords(figure)[0] <= x <= canvas1.coords(figure)[2]
+    # and canvas1.coords(figure)[1] <= y <= canvas1.coords(figure)[3]
 
-# def delete():
-# 動かした図形が同色の図形と接触した場合消滅する関数
+    if canvas1.coords(rect["red"]) == canvas1.coords(rect2["red"]):
+        canvas1.delete(rect["red"], rect2["red"])
+
+    if canvas1.coords(rect["green"]) == canvas1.coords(rect2["green"]):
+        canvas1.delete(rect["green"], rect2["green"])
+
+    if canvas1.coords(rect["yellow"]) == canvas1.coords(rect2["yellow"]):
+        canvas1.delete(rect["yellow"], rect2["yellow"])
+
+    if canvas1.coords(rect["blue"]) == canvas1.coords(rect2["blue"]):
+        canvas1.delete(rect["blue"], rect2["blue"])
+
+    if canvas1.coords(rect["pink"]) == canvas1.coords(rect2["pink"]):
+        canvas1.delete(rect["pink"], rect2["pink"])
+
+    if canvas1.coords(rect["purple"]) == canvas1.coords(rect2["purple"]):
+        canvas1.delete(rect["purple"], rect2["purple"])
+
+    if canvas1.coords(rect["orange"]) == canvas1.coords(rect2["orange"]):
+        canvas1.delete(rect["orange"], rect2["orange"])
 
 
 def main():
@@ -46,33 +68,26 @@ def main():
     canvas1.grid(row=0, column=0)
 
     # 色を用意
+    global colors
     colors = ("red", "green", "yellow", "blue", "purple", "pink", "orange")
 
+    global rect
+    global rect2
+    rect = {}
+    rect2 = {}
     # 色の数だけ適当に位置をずらしながら長方形（正方形）を描画
     for i, color in enumerate(colors):
-        print(i)
-        rect = canvas1.create_rectangle(i * 60 + 20, 20, i * 60 + 70, 70, fill=color)
-        rect2 = canvas1.create_rectangle(i * 60 + 20, 570, i * 60 + 70, 510, fill=color)
-
-        canvas1.tag_bind(rect, "<ButtonPress-1>", click)
-        canvas1.tag_bind(rect, "<Button1-Motion>", drag)
+        rect[color] = canvas1.create_rectangle(
+            i * 60 + 20, 20, i * 60 + 70, 70, fill=color
+        )
+        rect2[color] = canvas1.create_rectangle(
+            (w - (i * 60 + 20)), h - 20, (w - (i * 60 + 70)), h - 70, fill=color
+        )
+        canvas1.tag_bind(rect[color], "<ButtonPress-1>", click)
+        canvas1.tag_bind(rect[color], "<Button1-Motion>", drag)
 
     root.mainloop()
 
 
-import random
-import numpy as np
-
 if __name__ == "__main__":
     main()
-    # img = np.zeros((400, 600, 3), np.uint8)
-    # for i in range(10):  # 以下のインデント行を10回繰り返す
-    #     x = int(random.uniform(10, 590))  # 10以上590以下の乱数(浮動小数点型)を発生し、intで整数に変換、xとする
-    #     y = int(random.uniform(10, 390))  # 10以上390以下の乱数(浮動小数点型)を発生し、intで整数に変換、yとする
-    #     cv2.circle(img, (x, y), 10, (255, 255, 0), -1)  # 中心がx,y半径が10の水色の塗りつぶした円を描画
-
-    # cv2.imshow("random_circle", img)  # 別ウィンドウを開き(ウィンドウ名 "random_circle")オブジェクトimgを表示
-    # cv2.imwrite("random_circle.png", img)  # 画像をファイル名random_circle.pngで保存
-
-    # cv2.waitKey(0)  # キー入力待ち
-    # cv2.destroyAllWindows()  # ウインドウを閉じる
