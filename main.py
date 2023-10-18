@@ -75,16 +75,17 @@ def main():
     # 色を用意
     global colors
     colors = (
-        "red",
-        "green",
-        "yellow",
-        "blue",
-        "purple",
-        "pink",
-        "orange",
-        "black",
-        "skyblue",
-        "gray",
+        "#ff0000",  # 赤
+        "#008000",  # 緑
+        "#ffff00",  # 黄
+        "#0000ff",  # 青
+        "#800080",  # 紫
+        "#ff1493",  # 濃いピンク
+        "#ffc0cb",  # ピンク
+        "#ffa500",  # オレンジ
+        "#8a2be2",  # 青紫
+        "#87ceeb",  # スカイブルー
+        "#00ff00",  # ライム
     )
 
     global rect
