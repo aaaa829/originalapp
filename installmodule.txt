@@ -1,0 +1,9 @@
+Capture
+pip install ↓↓↓
+・pyqt5
+・numpy
+・pyautogui
+
+SS
+pip install ↓↓↓
+・win32
