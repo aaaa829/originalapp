@@ -2,10 +2,13 @@ import tkinter as tk
 from pygame.locals import *
 import pygame
 from PIL import Image, ImageTk
+import random as r
 
 
 rect = {}
 rect2 = {}
+w = 1024
+h = 576
 
 
 def click(event):
@@ -57,8 +60,8 @@ def quit():
 def main():
     global root
     global canvas1
-    w = 1024
-    h = 576
+    global w
+    global h
     root = tk.Tk()
 
     # 画像読み込み
@@ -96,11 +99,32 @@ def main():
         )
         canvas1.tag_bind(rect[color], "<ButtonPress-1>", click)
         canvas1.tag_bind(rect[color], "<Button1-Motion>", drag)
-        canvas1.create_text(
-            w / 2, h / 2, text="左上の四角を同じ色の右下の四角に合わせよう", font=("family", 30)
-        )
+        gamingcolor()
 
     root.mainloop()
+
+
+size = 30
+
+
+def gamingcolor():
+    global w, h, size
+    canvas1.delete("text")
+
+    if size >= 31:
+        size = 30
+    else:
+        size = 31
+    fontcolor = r.randint(0, len(colors) - 1)
+    canvas1.create_text(
+        w / 2,
+        h / 2,
+        text="左上の四角を同じ色の右下の四角に合わせよう",
+        font=("family", size),
+        fill=colors[fontcolor],
+        tag="text",
+    )
+    canvas1.after(10, gamingcolor)
 
 
 if __name__ == "__main__":

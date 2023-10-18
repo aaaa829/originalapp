@@ -50,9 +50,16 @@ state_map += state[0::-1]
 
 state_length = len(state_map)
 index = 0
+print("\n\n")
+
 # ゲーミングprint開始
-# while 1:
-#     color_code, to_hex = make_colorCode(state_map[index], inf, diff)
-#     # print(f"\033[2A{color_code}!! rainbow !!\t( #{to_hex} )\033[0m\n")
-#     index = (index + 1) % state_length
-#     time.sleep(0.02)
+while 1:
+    try:
+        color_code, to_hex = make_colorCode(state_map[index], inf, diff)
+        print(f"\033[2A{color_code}!! rainbow !!\t( #{to_hex} )\033[0m\n")
+        index = (index + 1) % state_length
+        time.sleep(0.02)
+
+    except KeyboardInterrupt:  # ctrl + C
+        print(" exit")
+        break
